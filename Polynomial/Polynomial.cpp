@@ -2,21 +2,25 @@
 #include<iostream>
 using namespace std;
 
+//Item的构造函数
 Item::Item(float coef, float exp)
 {
 	Coef = coef;
 	Exp = exp;
+	Next = NULL;
 }
+
+//Item的拷贝构造函数
 Item::Item(const Item& item)
 {
 	Coef = item.Coef;
 	Exp = item.Exp;
 	Next = NULL;
 }
-
+//Polynomial的构造函数
 Polynomial::Polynomial()
 {
-	polynomial = new Item();
+	polynomial = new Item();//申请头节点
 }
 
 //在添加的同时可排序和合并同类项，并删除合并后系数为0的项，故称superAdd
@@ -28,6 +32,8 @@ void Polynomial::superAdd(Item inItem)//如此处传入的是地址，则多次使用同一参数插
 		polynomial->Next = item;
 		return;
 	}
+	if (item->Coef == 0)//系数为0，直接放弃插入
+		return;
 	PItem temp = polynomial;//临时指针，用于循环查找
 	while (temp->Next != NULL)
 	{

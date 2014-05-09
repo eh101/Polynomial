@@ -3,6 +3,7 @@
 #include <iostream>
 using namespace std;
 
+//多项式的项的类
 typedef class Item *PItem;
 class Item
 {
@@ -10,10 +11,12 @@ public:
 	float Coef;
 	float Exp;
 	Item* Next;
+	//构造函数
 	Item(float coef = 0, float exp = 0);
+	//拷贝构造函数
 	Item(const Item& item);
 };
-
+//多项式类
 class Polynomial
 {
 	PItem polynomial;
