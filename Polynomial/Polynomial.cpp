@@ -10,7 +10,7 @@ Item::Item(float coef, float exp)
 	Next = NULL;
 }
 
-//Item的拷贝构造函数
+//Item的拷贝构造函数（不拷贝指针域）
 Item::Item(const Item& item)
 {
 	Coef = item.Coef;
@@ -27,13 +27,13 @@ Polynomial::Polynomial()
 void Polynomial::superAdd(Item inItem)//如此处传入的是地址，则多次使用同一参数插入时会改变原参数值
 {
 	PItem item = new Item(inItem);
+	if (item->Coef == 0)//系数为0，直接放弃插入
+		return;
 	if (polynomial->Next == NULL)//当前多项式中没有项，直接在头节点后插入item
 	{
 		polynomial->Next = item;
 		return;
 	}
-	if (item->Coef == 0)//系数为0，直接放弃插入
-		return;
 	PItem temp = polynomial;//临时指针，用于循环查找
 	while (temp->Next != NULL)
 	{
